@@ -103,7 +103,7 @@ pygame.init()  # 游戏初始化
 pygame.mixer.init()  # 混音器模块初始化
 window = pygame.display.set_mode((1100, 700))  # 创建游戏窗口
 pygame.display.set_caption("GoBang")  # 设置窗口标题
-music = pygame.mixer.Sound("./source/bg_music.mp3")
+music = pygame.mixer.Sound("./resource/陈熙珵 - 梅花三弄 [mqms2].ogg")
 
 #  初始化后续代码中的全局变量
 #  存储记录的数组
