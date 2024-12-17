@@ -103,7 +103,8 @@ pygame.init()  # 游戏初始化
 pygame.mixer.init()  # 混音器模块初始化
 window = pygame.display.set_mode((1100, 700))  # 创建游戏窗口
 pygame.display.set_caption("GoBang")  # 设置窗口标题
-music = pygame.mixer.Sound("./resource/陈熙珵 - 梅花三弄 [mqms2].ogg")
+music = pygame.mixer.music.load("./resource/陈熙珵 - 梅花三弄 [mqms2].ogg")
+
 
 #  初始化后续代码中的全局变量
 #  存储记录的数组
@@ -185,7 +186,7 @@ userName = []  # 玩家昵称
 namedict = dict()  # 玩家昵称字典
 page = 0  # 战绩页面页数
 rankpage = 1  # 排行榜页面页数
-voi = 0  # 音乐
+voi = 1  # 音乐
 mess = ""  # 本局游戏结果
 "-----------------------------------------------------------------------------------------------------------------------"
 #  section3 Interface initialization
@@ -201,6 +202,11 @@ def windowChange(order):
         startBackground = pygame.image.load("./resource/开始界面.png")
         window.blit(startBackground, (0, 0))
         voice = pygame.image.load("./resource/音效.png")
+        pygame.mixer.music.play()
+        if voi:
+            voice= pygame.image.load("./resource/音效.png")
+        else:
+            voice = pygame.image.load("./resource/音效关.png")
         voice = pygame.transform.scale(voice, (40, 40))
         window.blit(voice, (1020, 20))
         # 开始游戏按钮
@@ -1018,11 +1024,12 @@ def startFunc():
             windowChange(order)
         if x <= 1060 and x >= 1020 and y <= 60 and y >= 20:
             if voi:
-                music.stop()
+                pygame.mixer.music.pause()
                 voi = 0
             else:
-                music.play()
+                pygame.mixer.music.unpause()
                 voi = 1
+            windowChange(order)
 
 # 1游戏界面功能
 def gameFunc():
@@ -1367,7 +1374,6 @@ while True:
         # 规则
         if order == 9:
             ruleFunc()
-
 
 
 
